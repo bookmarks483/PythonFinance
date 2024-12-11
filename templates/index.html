@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}About - My Flask App{% endblock %}
+{% block content %}
+
+<ul class="row row-cols-3 row-cols-sm-4 row-cols-lg-6 row-cols-xl-8 list-unstyled list">
+    {% for dis in arrdisplay %}
+    <li class="col mb-4" data-name="bar-chart-fill" data-tags="chart graph analytics" data-categories="data">
+        <a class="d-block text-body-emphasis text-decoration-none" href="/report?expid={{dis[4]}}">
+            <div class="px-3 py-4 mb-2 bg-body-secondary text-center rounded">
+                <i class="bi bi-bar-chart-fill"></i><br>
+                <div class="name text-muted text-decoration-none text-center pt-1">{{dis[0]}}</div>
+                <span>{{dis[2]}}/{{dis[1]}}</span><br>
+                <span>Balance: {{dis[3]}}</span>
+            </div>
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

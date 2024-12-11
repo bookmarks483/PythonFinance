@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}About - My Flask App{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-sm-12">
+
+        {% if data %}
+        <h4>Report</h4>
+        <table class="table">
+            <tr>
+                <th>Expense Type</th>
+                <th>Amount</th>
+                <th>Transaction Type</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Entry By</th>
+            </tr>
+            {% for data in data %}
+            <tr>
+                <td>{{ data[0] }}</td>
+                <td>{{ data[1] }}</td>
+                <td>{{ data[2] }}</td>
+                <td>{{ data[3] }}</td>
+                <td>{{ data[4] }}</td>
+                <td>{{ data[5] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p>No users available.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

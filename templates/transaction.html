@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}About - My Flask App{% endblock %}
+{% block content %}
+<h4>Transaction</h4>
+<form method="POST" action="{{ url_for('submittran') }}">
+    <div class="mb-3">
+        <label for="expense_type" class="form-label">Choose Type of Expense</label>
+        <select type="text" class="form-control" id="expense_type" name="expense_type">
+            <option value="0">--Select--</option>
+            {% for expense in expenses %}
+                <option value="{{ expense[0] }}">{{ expense[1] }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="amount" class="form-label">Amount</label>
+        <input type="number" class="form-control" id="amount" name="amount" required>
+    </div>
+    <div class="mb-3">
+        <label for="transaction_type" class="form-label">Transaction Type</label>
+        <select class="form-select" id="transaction_type" name="transaction_type">
+            <option value="receipt">Receipt</option>
+            <option value="payment">Payment</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea class="form-control" id="description" name="description" rows="4"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<hr>
+{% if transaction %}
+        <h4>List of Expenses</h4>
+        <table class="table">
+            <tr>
+                <th>ID</th>
+                <th>Expense Type</th>
+                <th>Amount</th>
+                <th>Transaction Type</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Entry By</th>
+                <th>Delete</th>
+            </tr>
+            {% for trn in transaction %}
+            <tr>
+                <td>{{ trn[0] }}</td>
+                <td>{{ trn[2] }}</td>
+                <td>{{ trn[3] }}</td>
+                <td>{{ trn[4] }}</td>
+                <td>{{ trn[5] }}</td>
+                <td>{{ trn[7] }}</td>
+                <td>{{ trn[8] }}</td>
+                <td>
+                    <form method="POST" action="{{ url_for('delete_trans') }}?trans_id={{trn[0]}}">
+                        <button type="submit" style="border: none; background: none;">
+                    <img src="{{url_for('static',filename='images/delete.png')}}" style="cursor: pointer;">
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p>No users available.</p>
+        {% endif %}
+
+{% endblock %}
